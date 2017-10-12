@@ -1,0 +1,9 @@
+{
+    "name": "keboola/processor-add-row-number-column",
+    "license": "MIT",
+    "type": "project",	
+    "require": {
+        "keboola/csv": "^1.1",
+        "PHP": "^7.1"
+    }
+}

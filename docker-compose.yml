@@ -1,0 +1,14 @@
+version: '2'
+services:
+  dev:
+    build: .
+    image: keboola/processor-add-row-number-column
+    tty: true
+    stdin_open: true
+    volumes:
+      - .:/code
+
+  processor-add-row-number-column:
+    image: keboola/processor-add-row-number-column
+    tty: true
+    stdin_open: true

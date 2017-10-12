@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/keboola/processor-add-row-number-column.svg?branch=master)](https://travis-ci.org/keboola/processor-add-row-number-column)
 
-Takes all CSV files in `/data/in/tables` (except `.manifest` files) and appends column with the filename (column name optional) and stores the files to `/data/out/tables`. 
+Takes all CSV files in `/data/in/tables` (except `.manifest` files) and appends column with the row number starting from 1 (column name optional, headers ignored) and stores the files to `/data/out/tables`. 
 
  - Does not ignores directory structure (for sliced files).
  - Ignores manifests `columns` attribute.

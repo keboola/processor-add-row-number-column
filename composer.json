@@ -4,6 +4,23 @@
     "type": "project",	
     "require": {
         "keboola/csv": "^1.1",
-        "PHP": "^7.1"
+        "PHP": "^7.1",
+        "symfony/filesystem": "^3.3",
+        "symfony/finder": "^3.3",
+        "keboola/php-temp": "^0.1",
+        "symfony/process": "^3.3",
+        "symfony/serializer": "^3.3",
+        "symfony/config": "^3.3"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.1",
+        "phpstan/phpstan": "^0.8"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Keboola\\Processor\\AddRowNumberColumn\\": "src/"
+        },
+        "files": ["src/processFile.php"]
     }
 }

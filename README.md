@@ -2,44 +2,25 @@
 
 [![Build Status](https://travis-ci.org/keboola/processor-add-row-number-column.svg?branch=master)](https://travis-ci.org/keboola/processor-add-row-number-column)
 
-Takes all CSV files in `/data/in/tables` (except `.manifest` files) and appends column with the row number starting from 1 (column name optional, headers ignored) and stores the files to `/data/out/tables`. 
+Takes all tables in `/data/in/tables` and appends a column with the row number starting from 1 (column name optional) and stores the files to `/data/out/tables`. 
 
  - Does not ignores directory structure (for sliced files).
- - Ignores manifests `columns` attribute.
- - Can add column header.
+ - Updates manifest file.
+
+## Prerequisites
+
+All CSV files must
+
+- not have headers
+- have a manifest file with `columns`, `delimiter` and `enclosure` properties
  
-## Development
- 
-Clone this repository and init the workspace with following command:
+## Usage
+Supports optional parameters:
 
-```
-git clone https://github.com/keboola/processor-add-row-number-column
-cd processor-add-row-number-column
-docker-compose build
-```
+- `column_name ` -- Name of the column, defaults to `row_number`
 
-Run the test suite using this command:
 
-```
-./tests/run.sh
-```
- 
-# Integration
- - Build is started after push on [Travis CI](https://travis-ci.org/keboola/processor-add-row-number-column)
- - [Build steps](https://github.com/keboola/processor-add-row-number-column/blob/master/.travis.yml)
-   - build image
-   - execute tests against new image
-   - publish image to ECR if release is tagged
-   
-# Usage
-It supports optional parameters:
-
-- `column_name ` -- Name of the column. The first row of each CSV file is the header.
-- `delimiter` -- CSV delimiter, defaults to `,`
-- `enclosure` -- CSV enclosure, defaults to `"`
-- `escaped_by` -- escape character for the enclosure, defaults to empty
-
-## Sample configurations
+### Sample configurations
 
 Default parameters:
 
@@ -59,22 +40,33 @@ Add column name header:
         "component": "keboola.processor-add-row-number-column"
     },
     "parameters": {
-    	"column_name": "filename"
+    	"column_name": "myRowNumberColumn"
 	}
 }
 
 ```
-
-Use tab as delimiter and single quote as enclosure:
+ 
+## Development
+ 
+Clone this repository and init the workspace with following command:
 
 ```
-{
-    "definition": {
-        "component": "keboola.processor-add-row-number-column"
-    },
-    "parameters": {
-    	"delimiter": "\t",
-    	"enclosure": "'"
-	}
-}
+git clone https://github.com/keboola/processor-add-row-number-column
+cd processor-add-row-number-column
+docker-compose build
+docker-compose run dev composer install
 ```
+
+Run the test suite using this command:
+
+```
+docker-compose run tests
+```
+ 
+## Integration
+ - Build is started after push on [Travis CI](https://travis-ci.org/keboola/processor-add-row-number-column)
+ - [Build steps](https://github.com/keboola/processor-add-row-number-column/blob/master/.travis.yml)
+   - build image
+   - execute tests against new image
+   - publish image to ECR if release is tagged
+   

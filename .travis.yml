@@ -5,7 +5,9 @@ services:
 before_script:
   - docker-compose build
   - docker-compose run dev composer install
-script: ./tests/run.sh
+  - docker-compose run dev ./vendor/bin/phpcs --standard=psr2 --ignore=vendor -n .
+  - docker-compose run dev ./vendor/bin/phpstan analyse  --level=7 ./src ./tests ./main.php
+script: docker-compose run tests
 after_success:
   - docker images
 deploy:

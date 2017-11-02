@@ -1,7 +1,6 @@
 version: '2'
 services:
   dev:
-    build: .
     image: keboola/processor-add-row-number-column
     tty: true
     stdin_open: true
@@ -9,6 +8,15 @@ services:
       - .:/code
 
   processor-add-row-number-column:
+    build: .
     image: keboola/processor-add-row-number-column
     tty: true
     stdin_open: true
+
+  tests:
+    image: keboola/processor-add-row-number-column
+    tty: true
+    stdin_open: true
+    volumes:
+      - .:/code
+    command: php /code/tests/run.php

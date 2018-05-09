@@ -95,6 +95,7 @@ try {
     echo $e->getMessage();
     exit(1);
 } catch (\Exception $e) {
-    echo $e->getMessage();
+    echo $e->getMessage() . PHP_EOL;
+    echo $e->getTraceAsString();
     exit(2);
 }

@@ -102,7 +102,11 @@ try {
     echo $e->getMessage();
     exit(1);
 } catch (\Exception $e) {
-    echo $e->getMessage() . PHP_EOL;
-    echo $e->getTraceAsString();
+    fwrite(STDERR, get_class($e) . ':' . $e->getMessage());
+    fwrite(STDERR, PHP_EOL . "File: " . $e->getFile());
+    fwrite(STDERR, PHP_EOL . "Line: " . $e->getLine());
+    fwrite(STDERR, PHP_EOL . "Code: " . $e->getCode());
+    fwrite(STDERR, PHP_EOL . "Trace: " . $e->getTraceAsString());
+    fwrite(STDERR, PHP_EOL);
     exit(2);
 }

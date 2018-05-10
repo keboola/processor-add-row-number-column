@@ -73,7 +73,14 @@ try {
             if (!$fs->exists($slicedDestination)) {
                 $fs->mkdir($slicedDestination);
             }
+            /**
+             * @var \Symfony\Component\Finder\SplFileInfo $slicedFile
+             */
             foreach ($slicedFiles as $slicedFile) {
+                if (is_dir($slicedFile->getPathname())) {
+                    $message = $slicedFile->getPathname() . " is a folder. Use processor-flatten-folders?";
+                    throw new \Keboola\Processor\AddRowNumberColumn\Exception($message);
+                }
                 \Keboola\Processor\AddRowNumberColumn\processFile(
                     $slicedFile,
                     $slicedDestination,
@@ -95,6 +102,11 @@ try {
     echo $e->getMessage();
     exit(1);
 } catch (\Exception $e) {
-    echo $e->getMessage();
+    fwrite(STDERR, get_class($e) . ':' . $e->getMessage());
+    fwrite(STDERR, PHP_EOL . "File: " . $e->getFile());
+    fwrite(STDERR, PHP_EOL . "Line: " . $e->getLine());
+    fwrite(STDERR, PHP_EOL . "Code: " . $e->getCode());
+    fwrite(STDERR, PHP_EOL . "Trace: " . $e->getTraceAsString());
+    fwrite(STDERR, PHP_EOL);
     exit(2);
 }

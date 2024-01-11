@@ -3,7 +3,7 @@
     "license": "MIT",
     "type": "project",	
     "require": {
-        "keboola/csv": "^1.1",
+        "keboola/csv": "^3.4",
         "PHP": "^7.1",
         "symfony/filesystem": "^3.3",
         "symfony/finder": "^3.3",

@@ -1,7 +1,8 @@
 <?php
 namespace Keboola\Processor\AddRowNumberColumn;
 
-use Keboola\Csv\CsvFile;
+use Keboola\Csv\CsvReader;
+use Keboola\Csv\CsvWriter;
 
 /**
  * @param \SplFileInfo $sourceFile
@@ -11,8 +12,8 @@ use Keboola\Csv\CsvFile;
  */
 function processFile(\SplFileInfo $sourceFile, $destinationFolder, $delimiter, $enclosure)
 {
-    $sourceCsv = new CsvFile($sourceFile->getPathname(), $delimiter, $enclosure);
-    $destinationCsv = new CsvFile($destinationFolder . $sourceFile->getFilename(), $delimiter, $enclosure);
+    $sourceCsv = new CsvReader($sourceFile->getPathname(), $delimiter, $enclosure);
+    $destinationCsv = new CsvWriter($destinationFolder . $sourceFile->getFilename(), $delimiter, $enclosure);
     foreach ($sourceCsv as $index => $row) {
         $rowNumber = $index + 1;
         $row[] = $rowNumber;

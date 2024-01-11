@@ -68,3 +68,7 @@ docker-compose run tests
    - execute tests against new image
    - publish image to ECR if release is tagged
    
+
+## License
+
+MIT licensed, see [LICENSE](./LICENSE) file.

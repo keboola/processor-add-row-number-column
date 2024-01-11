@@ -1,7 +1,5 @@
 # processor-add-row-number-column
 
-[![Build Status](https://travis-ci.org/keboola/processor-add-row-number-column.svg?branch=master)](https://travis-ci.org/keboola/processor-add-row-number-column)
-
 Takes all tables in `/data/in/tables` and appends a column with the row number starting from 1 (column name optional) and stores the files to `/data/out/tables`. 
 
  - Does not ignores directory structure (for sliced files).

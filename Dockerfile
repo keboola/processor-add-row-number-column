@@ -1,4 +1,4 @@
-FROM php:7-cli
+FROM php:7-cli-buster
 
 ARG COMPOSER_FLAGS="--prefer-dist --no-interaction"
 ARG DEBIAN_FRONTEND=noninteractive
@@ -13,8 +13,8 @@ COPY docker/composer-install.sh /tmp/composer-install.sh
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	    git \
         zlib1g-dev \
+        unzip \
 	&& rm -r /var/lib/apt/lists/* \
-	&& docker-php-ext-install -j$(nproc) zip \
 	&& chmod +x /tmp/composer-install.sh \
 	&& /tmp/composer-install.sh
 
